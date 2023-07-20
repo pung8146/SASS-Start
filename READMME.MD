@@ -64,3 +64,85 @@ div {
   }
 }
 ```
+
+# 단축 속성
+
+> 단축 속성은 여러가지 CSS 속성의 값을 함께 지정할 수 있는 속성으로,같은 주제를 가진 여러 공통 속성을 묶기 위해 정의하는 속성이다. Sass에서는 중첩을 이용해 단축 속성의 하위 속성을 그룹화 할 수 있다.** 접두어가 같은 태그들 **
+
+```css
+p {
+  font: {
+    family: sans-serif;
+    size: 1em;
+    style: normal;
+    weight: 900;
+  }
+}
+```
+
+# & 기호로 상위 선택자 참조하기
+
+ex: $hover, $active
+
+# 변수 사용가능
+
+```css
+$main-color: red;
+
+div {
+  color: $main-color;
+}
+```
+
+# 믹스인
+
+> 믹스인을 만들때는 @mixin 지시자를 사용한다. 지시자 뒤에는 만들고자 하는 믹스인의 이름을 써준다 변수와 마찬가지
+
+```css
+1. 정의를 해줍니다 @mixin my-font {
+  family: sans-serif;
+  size: 32px;
+  style: normal;
+}
+
+2. 사용 할 곳에 불러옵니다 h1 {
+  @include my-font;
+}
+```
+
+## 믹스인 인자
+
+> 믹스인 정의 시 괄호와 함께 변수를 추가하면 인자가 정의되며,개수제한은 없습니다. 믹스인 호출 시에 인자를 전달하고 싶다면, 믹스인 이름 옆에 괄호와 함께 속성값을 추가하면 됩니다.
+
+```css
+// 1. 괄호와 함께 속성 값을 추가합니다.
+@mixin my-font($font-color) {
+  family: sans-serif;
+  size: 32px;
+  style: normal;
+  color: $font-color;
+}
+
+// 2. 사용 할 곳에 불러옵니다
+h1 {
+  @include my-font(red;);
+}
+
+p {
+  @include my-font(blue);
+}
+```
+
+## 믹스인 인자 기본값
+
+> 인자를 전달할 수도, 전달하지 않을 믹스인을 만들 수 있습니다.기본값은 인자로 정의된 변수 옆에 ':'를 쓰고 속성값을 써서 정의합니다.
+
+```css
+// 1. 기본값은 인자로 정의된 변수 옆에 ':'를 쓰고 속성값을 써서 정의합니다.
+@mixin my-font($font-color, $bg-color: yellow) {
+  family: sans-serif;
+  size: 32px;
+  style: normal;
+  color: $font-color;
+}
+```
